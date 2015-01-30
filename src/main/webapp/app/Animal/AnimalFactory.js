@@ -5,8 +5,8 @@ factories.factory('animalFactory', ['$http', '$log','API_ENDPOINT', function($ht
         getAll: function() {
             return $http.get(API_ENDPOINT);
         },
-        nonono: function() {
-            return $http.get(API_ENDPOINT+'/nonono');
+        nono: function() {
+            return $http.get(API_ENDPOINT+'/nono');
         },
 		getbyId : function(id) {
 			return $http.get(API_ENDPOINT + '/' + id);

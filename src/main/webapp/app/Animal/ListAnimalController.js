@@ -139,7 +139,7 @@ controllers.controller('ListAnimalController', [
 			}
 			
 			vm.nono = function(){
-				animalFactory.nonono().then(function(response) {
+				animalFactory.nono().then(function(response) {
 
 					$log.info(response.data);
 
