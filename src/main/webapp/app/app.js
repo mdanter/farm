@@ -11,4 +11,4 @@ angular.module('farmApp', ['ngRoute', 'farmApp.factories', 'farmApp.directives',
     $routeProvider.otherwise({redirectTo: '/animal/list'});
     
     $httpProvider.interceptors.push('sessionInterceptor');
-  }]).constant('API_ENDPOINT','/farm/api/rest/v1/animal');
+  }]).constant('API_ENDPOINT','/api/rest/v1/animal');
