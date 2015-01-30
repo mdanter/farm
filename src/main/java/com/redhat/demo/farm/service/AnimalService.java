@@ -1,8 +1,9 @@
-package com.redhat.demo.farm.dto;
+package com.redhat.demo.farm.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,10 +20,22 @@ public class AnimalService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AnimalService.class);
 
-	private Map<Long, Animal> farm = new ConcurrentHashMap<Long, Animal>();
+	private Map<String, Animal> farm = new ConcurrentHashMap<String, Animal>();
 
 	public AnimalService() {
-
+		Animal a1 = new Animal();
+		a1.setName("Larry");
+		a1.setSold(false);
+		a1.setSpecies("Lama");
+		
+		Animal a2 = new Animal();
+		a2.setName("Harold");
+		a2.setSold(false);
+		a2.setSpecies("Sheep");
+		
+		create(a1);
+		create(a2);
+		
 	}
 
 	public Animal getById(Long id) {
@@ -35,22 +48,30 @@ public class AnimalService {
 		return new ArrayList<Animal>(farm.values());
 	}
 
-	public Animal update(Long id, Animal animal) {
+	public Animal update(String id, Animal animal) {
 		LOG.info("updating animal with id: " + id + " to " + animal);
 		farm.put(id, animal);
 		return animal;
 	}
 
 	public Animal create(Animal animal) {
+		
+		String uuid = UUID.randomUUID().toString();
+		
+		animal.setImageSrc("http://lorempixel.com/350/350/animals/"
+				+ animal.getName());
+		animal.setId(uuid);
+
 		LOG.info("adding animal: " + animal);
-		farm.put(animal.getId(), animal);
+		
+		farm.put(uuid, animal);
 		return animal;
 	}
 
-	public void delete(Animal animal) {
-		LOG.info("deleting animal: " + animal);
-		if (farm.containsKey(animal.getId()))
-			farm.remove(animal.getId());
+	public void delete(String id) {
+		LOG.info("deleting animal: " + id);
+		if (farm.containsKey(id))
+			farm.remove(id);
 	}
 
 	public Boolean feed(Animal animal) throws InterruptedException {
@@ -60,7 +81,7 @@ public class AnimalService {
 		if (farm.containsKey(animal.getId())) {
 			Animal a = farm.get(animal.getId());
 			a.setTimesFed(a.getTimesFed() + 1);
-			Thread.sleep(2000L);
+			Thread.sleep(5000L);
 
 			return Boolean.TRUE;
 		} else {
@@ -68,13 +89,13 @@ public class AnimalService {
 		}
 	}
 
-	public Boolean harvest(Animal animal) throws InterruptedException {
-		LOG.info("harvesting animal: " + animal);
+	public Boolean sell(Animal animal) throws InterruptedException {
+		LOG.info("sellinging animal: " + animal);
 		if (farm.containsKey(animal.getId())) {
 			Animal a = farm.get(animal.getId());
-			a.setHarvested(Boolean.TRUE);
-			Thread.sleep(5000L);
-			return a.getHarvested();
+			a.setSold(Boolean.TRUE);
+			Thread.sleep(2000L);
+			return a.getSold();
 		} else {
 			return Boolean.FALSE;
 		}

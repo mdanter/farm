@@ -1,0 +1,23 @@
+<div data-ng-controller="CreateAnimalController as partialCtrl">
+	<div data-ng-include src="'app/Animal/_createHeader.html'" />
+
+		<h3>Add Animal to Farm</h3>
+
+		<div data-ng-include src="'app/Shared/_feedback.html'" ></div>
+
+		<form name="createForm" class="">
+			<div class="form-group">
+				<label for="orgUnit">Name</label>
+				<input type="text" class="form-control" id="name" placeholder="Name"
+					data-ng-model="partialCtrl.animal.name" data-ng-pattern="/^[a-zA-Z\s]*$/" />
+			</div>
+			<div class="form-group">
+				<label for="name">Species</label> <input type="text"
+					data-ng-model="partialCtrl.animal.species" class="form-control" id="species"
+					placeholder="Species" required data-ng-pattern="/^[a-zA-Z\s]*$/" />
+			</div>
+			<button type="submit" class="btn btn-primary pull-left"
+				data-ng-click="partialCtrl.create()" data-ng-disabled="createForm.$invalid">Create</button>
+		</form>
+
+</div>

@@ -14,7 +14,7 @@ public class Animal implements Serializable {
 	private static final long serialVersionUID = 7488883117216954458L;
 
 	@XmlAttribute
-	private Long id;
+	private String id;
 	
 	@XmlElement
 	private String species;
@@ -29,13 +29,13 @@ public class Animal implements Serializable {
 	private Long timesFed = 0L;
 	
 	@XmlElement
-	private Boolean harvested = Boolean.FALSE;
+	private Boolean sold = Boolean.FALSE;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -71,12 +71,12 @@ public class Animal implements Serializable {
 		this.timesFed = timesFed;
 	}
 
-	public Boolean getHarvested() {
-		return harvested;
+	public Boolean getSold() {
+		return sold;
 	}
 
-	public void setHarvested(Boolean harvested) {
-		this.harvested = harvested;
+	public void setSold(Boolean sold) {
+		this.sold = sold;
 	}
 
 	public static long getSerialversionuid() {
@@ -88,7 +88,7 @@ public class Animal implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((harvested == null) ? 0 : harvested.hashCode());
+				+ ((sold == null) ? 0 : sold.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((imageSrc == null) ? 0 : imageSrc.hashCode());
@@ -108,10 +108,10 @@ public class Animal implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Animal other = (Animal) obj;
-		if (harvested == null) {
-			if (other.harvested != null)
+		if (sold == null) {
+			if (other.sold != null)
 				return false;
-		} else if (!harvested.equals(other.harvested))
+		} else if (!sold.equals(other.sold))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -145,7 +145,7 @@ public class Animal implements Serializable {
 	public String toString() {
 		return "Animal [id=" + id + ", species=" + species + ", name=" + name
 				+ ", imageSrc=" + imageSrc + ", timesFed=" + timesFed
-				+ ", harvested=" + harvested + "]";
+				+ ", sold=" + sold + "]";
 	}
 
 	

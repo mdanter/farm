@@ -1,0 +1,32 @@
+<div data-ng-controller="ListAnimalController as partialCtrl">
+	<div data-ng-include src="'app/Animal/_listHeader.html'" />
+	
+		<h3>Animals</h3>
+
+		<div data-ng-include src="'app/Shared/_feedback.html'"></div>
+
+		<table class="table table-striped">
+			<tr>
+				<th>ID</th>
+				<th>Species</th>
+				<th>Name</th>
+				<th>Times Fed</th>
+				<th>Options</th>
+			</tr>
+			<tr data-ng-repeat="animal in partialCtrl.animals">
+				<td>{{animal.id}}</td>
+				<td>{{animal.species}}</td>
+				<td>{{animal.name}}</td>
+				<td>{{animal.timesFed}}</td>
+				<td>
+					<div class="btn-group">
+						<a class="btn btn-primary" data-ng-click="partialCtrl.view(animal)">View</a> 
+						<a class="btn btn-primary" data-ng-click="">Update</a> 
+						<a class="btn btn-success" data-ng-disabled="animal.sold==true" data-ng-click="partialCtrl.feed(animal)">Feed</a>
+						<a class="btn btn-info" data-ng-disabled="animal.sold==true" data-ng-click="partialCtrl.sell(animal)">Sell</a>
+						<a class="btn btn-danger" data-ng-click="partialCtrl.remove(animal)">Delete</a>
+					</div>
+				</td>
+			</tr>
+		</table>
+</div>
